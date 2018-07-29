@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
 
 android {
     compileSdkVersion 28
@@ -24,3 +27,5 @@ dependencies {
     api project(':injectedvmprovider')
     api "android.arch.lifecycle:extensions:$lifecycle_version"
 }
+
+apply from: '../publish.gradle'

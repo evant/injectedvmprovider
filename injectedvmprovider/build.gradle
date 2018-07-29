@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 19
@@ -27,3 +28,5 @@ dependencies {
     api "android.arch.lifecycle:viewmodel:$lifecycle_version"
     api 'javax.inject:javax.inject:1'
 }
+
+apply from: '../publish.gradle'

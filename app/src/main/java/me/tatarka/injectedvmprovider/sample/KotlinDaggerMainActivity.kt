@@ -12,7 +12,6 @@ import javax.inject.Provider
 class KotlinDaggerMainActivity : AppCompatActivity() {
 
     @Inject
-    @Named("DaggerKotlin")
     lateinit var vmProvider: Provider<MainViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
