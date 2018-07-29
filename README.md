@@ -36,6 +36,8 @@ Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:
 implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:1.0'
 ```
 
+For androidx, use version 2.0 instead.
+
 #### Usage
 ```kotlin
 class KotlinDaggerMainActivity : AppCompatActivity() {
