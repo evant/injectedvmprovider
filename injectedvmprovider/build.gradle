@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    api "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     api 'javax.inject:javax.inject:1'
 }
 

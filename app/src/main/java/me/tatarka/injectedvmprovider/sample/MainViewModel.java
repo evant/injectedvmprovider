@@ -1,6 +1,6 @@
 package me.tatarka.injectedvmprovider.sample;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 import android.util.Log;
 
 import javax.inject.Inject;
