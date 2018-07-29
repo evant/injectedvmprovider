@@ -9,6 +9,7 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 ```groovy
 implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-extensions:1.0'
 ```
+For androidx, use version 2.0 instead.
 
 #### Usage
 ```java
