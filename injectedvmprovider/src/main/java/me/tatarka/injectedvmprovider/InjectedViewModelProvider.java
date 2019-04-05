@@ -15,7 +15,7 @@ import javax.inject.Provider;
  * {@link Provider}'s.
  * <p>
  * Default {@code ViewModelProvider} for an {@code Activity} or a {@code Fragment} can be obtained
- * from {@link InjectedViewModelProviders} class.
+ * from {@link InjectedViewModelProvider} class.
  * <p>
  * Usage:
  * <pre>{@code
@@ -100,6 +100,26 @@ public class InjectedViewModelProvider {
         ViewModel viewModel = ViewModelStoreBridge.get(store, key);
         if (viewModel == null) {
             viewModel = provider.get();
+            ViewModelStoreBridge.put(store, key, viewModel);
+        }
+        //noinspection unchecked
+        return (T) viewModel;
+    }
+
+    public <F, T extends ViewModel> T get(@NonNull F factory, FactoryCreator<F, T> creator) {
+        String canonicalName = factory.getClass().getCanonicalName();
+        if (canonicalName == null) {
+            throw new IllegalArgumentException("Local and anonymous classes can not be ViewModels");
+        }
+        return get(DEFAULT_KEY + ":" + canonicalName, factory, creator);
+    }
+
+    @NonNull
+    @MainThread
+    public <F, T extends ViewModel> T get(@NonNull String key, @NonNull F factory, FactoryCreator<F, T> creator) {
+        ViewModel viewModel = ViewModelStoreBridge.get(store, key);
+        if (viewModel == null) {
+            viewModel = creator.create(factory);
             ViewModelStoreBridge.put(store, key, viewModel);
         }
         //noinspection unchecked

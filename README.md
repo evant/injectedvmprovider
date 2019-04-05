@@ -9,8 +9,23 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 ```groovy
 implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-extensions:1.0'
 ```
+For androidx, use version 2.0 instead.
 
 #### Usage
+
+Set up your ViewModel
+```java
+public class MyViewModel extends ViewModel {
+    private final MyDependency source;
+
+    @Inject
+    public MainViewModel(MyDependency source) {
+        this.source = source;
+    }
+}
+```
+
+Inject your ViewModel provider into the desired Fragment or Activity
 ```java
 public class MyActivity extends AppCompatActivity {
 
@@ -35,7 +50,16 @@ Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:
 implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:1.0'
 ```
 
+For androidx, use version 2.0 instead.
+
 #### Usage
+
+ViewModel
+```kotlin
+class MainViewModel @Inject constructor(val dependency: Dependency): ViewModel()
+```
+
+Injection
 ```kotlin
 class KotlinDaggerMainActivity : AppCompatActivity() {
 
