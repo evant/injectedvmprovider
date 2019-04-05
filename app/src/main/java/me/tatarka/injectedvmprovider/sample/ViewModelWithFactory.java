@@ -1,9 +1,10 @@
 package me.tatarka.injectedvmprovider.sample;
 
-import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import javax.inject.Inject;
+
+import androidx.lifecycle.ViewModel;
 
 public class ViewModelWithFactory extends ViewModel {
     private static final String TAG = "ViewModelWithFactory";
