@@ -1,1 +1,3 @@
+rootProject.name = 'injectedvmprovider-project'
+
 include ':app', ':injectedvmprovider', ':injectedvmprovider-extensions', ':injectedvmprovider-ktx'

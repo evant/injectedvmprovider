@@ -73,25 +73,4 @@ if (project.hasProperty('sonatype.username') || project.hasProperty('bintray.use
             }
         }
     }
-
-    if (project.hasProperty('bintray.username')) {
-        bintray {
-            user = project.property('bintray.username')
-            key = project.property('bintray.apikey')
-            configurations = ['archives']
-            pkg {
-                repo = 'maven'
-                name = 'injectedvmprovider'
-                websiteUrl = siteUrl
-                vcsUrl = gitUrl
-                licenses = ["Apache-2.0"]
-                version {
-                    gpg {
-                        sign = true
-                        passphrase = project.getProperty('signing.password')
-                    }
-                }
-            }
-        }
-    }
 }
