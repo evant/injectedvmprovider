@@ -6,10 +6,12 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 ### From Java
 
 #### Download
+[![Maven Central](https://img.shields.io/maven-central/v/me.tatarka.injectedvmprovider/injectedvmprovider.svg)](https://search.maven.org/search?q=g:me.tatarka.injectedvmprovider)
+[![Sonatype Snapshot](https://img.shields.io/nexus/s/https/oss.sonatype.org/me.tatarka.injectedvmprovider/injectedvmprovider.svg)](https://oss.sonatype.org/content/repositories/snapshots/me/tatarka/injectedvmprovider/)
+
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-extensions:1.0'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-extensions:2.1.0'
 ```
-For androidx, use version 2.0 instead.
 
 #### Usage
 
@@ -40,7 +42,7 @@ public class MyActivity extends AppCompatActivity {
     }
 }
 ```
-Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:injectedvmprovider:1.0`, and use `new InjectedViewModelProvider(viewModelStoreOwner)` instead.
+Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:injectedvmprovider:2.1.0`, and use `new InjectedViewModelProvider(viewModelStoreOwner)` instead.
 
 
 
@@ -62,10 +64,8 @@ protected void onCreate(Bundle savedInstanceState) {
 
 #### Download
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:1.0'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:2.1.0'
 ```
-
-For androidx, use version 2.0 instead.
 
 #### Usage
 
