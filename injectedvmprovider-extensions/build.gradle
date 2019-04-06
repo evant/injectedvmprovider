@@ -22,7 +22,7 @@ android {
 
 dependencies {
     api project(':injectedvmprovider')
-    api "android.arch.lifecycle:extensions:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 }
 
 apply from: '../publish.gradle'

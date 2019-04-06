@@ -1,17 +1,17 @@
 package me.tatarka.injectedvmprovider;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelStore;
-import android.arch.lifecycle.ViewModelStoreBridge;
-import android.arch.lifecycle.ViewModelStoreOwner;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelStore;
+import androidx.lifecycle.ViewModelStoreBridge;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 
 import javax.inject.Provider;
 
 /**
  * An utility class that provides {@code ViewModels} for a scope. Instead of using a
- * {@link android.arch.lifecycle.ViewModelProvider.Factory}, instances of obtains from injected
+ * {@link androidx.lifecycle.ViewModelProvider.Factory}, instances of obtains from injected
  * {@link Provider}'s.
  * <p>
  * Default {@code ViewModelProvider} for an {@code Activity} or a {@code Fragment} can be obtained
