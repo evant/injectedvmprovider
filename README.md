@@ -40,8 +40,23 @@ public class MyActivity extends AppCompatActivity {
     }
 }
 ```
-
 Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:injectedvmprovider:1.0`, and use `new InjectedViewModelProvider(viewModelStoreOwner)` instead.
+
+
+
+If you have a factory, you can inject that instead. This is useful for passing in intent arguments to the view model, and/or with [assisted injection](https://github.com/square/AssistedInject).
+
+```java
+@Inject
+MyViewModel.Factory vmFactory;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ...
+    MyViewModel vm = InjectedViewModelProviders.of(this).get(vmFactory, factory -> factory.create("arg"));
+}
+```
 
 ### From Kotlin
 
@@ -69,7 +84,7 @@ class KotlinDaggerMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ...
-        val vm = injectedViewModelProvider[vmProvider]
+        val vm = injectedViewModelProvider.get(vmProvider)
     }
 }
 ```
