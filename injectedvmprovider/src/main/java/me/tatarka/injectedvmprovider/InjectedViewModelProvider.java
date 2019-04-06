@@ -106,6 +106,23 @@ public class InjectedViewModelProvider {
         return (T) viewModel;
     }
 
+    /**
+     * Returns an existing ViewModel or creates a new one in the scope (usually, a fragment or
+     * an activity), associated with this {@code ViewModelProvider}.
+     * <p>
+     * The created ViewModel is associated with the given scope and will be retained
+     * as long as the scope is alive (e.g. if it is an activity, until it is
+     * finished or process is killed).
+     *
+     * @param factory The factory of the ViewModel.
+     * @param creator The factory creator of the ViewModel to create an instance of it if it is not
+     *                present.
+     * @param <F>     The type parameter for the factory.
+     * @param <T>     The type parameter for the ViewModel.
+     * @return A ViewModel that is an instance of the given type {@code T}.
+     */
+    @NonNull
+    @MainThread
     public <F, T extends ViewModel> T get(@NonNull F factory, FactoryCreator<F, T> creator) {
         String canonicalName = factory.getClass().getCanonicalName();
         if (canonicalName == null) {
@@ -114,6 +131,22 @@ public class InjectedViewModelProvider {
         return get(DEFAULT_KEY + ":" + canonicalName, factory, creator);
     }
 
+    /**
+     * Returns an existing ViewModel or creates a new one in the scope (usually, a fragment or
+     * an activity), associated with this {@code ViewModelProvider}.
+     * <p>
+     * The created ViewModel is associated with the given scope and will be retained
+     * as long as the scope is alive (e.g. if it is an activity, until it is
+     * finished or process is killed).
+     *
+     * @param key      The key to use to identify the ViewModel.
+     * @param factory The factory of the ViewModel.
+     * @param creator The factory creator of the ViewModel to create an instance of it if it is not
+     *                present.
+     * @param <F>     The type parameter for the factory.
+     * @param <T>     The type parameter for the ViewModel.
+     * @return A ViewModel that is an instance of the given type {@code T}.
+     */
     @NonNull
     @MainThread
     public <F, T extends ViewModel> T get(@NonNull String key, @NonNull F factory, FactoryCreator<F, T> creator) {
