@@ -1,6 +1,5 @@
 package me.tatarka.injectedvmprovider;
 
-import androidx.lifecycle.ViewModelStores;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,7 +20,7 @@ public class InjectedViewModelProviders {
      */
     @MainThread
     public static InjectedViewModelProvider of(@NonNull Fragment fragment) {
-        return new InjectedViewModelProvider(ViewModelStores.of(fragment));
+        return new InjectedViewModelProvider(fragment.getViewModelStore());
     }
 
     /**
@@ -34,6 +33,6 @@ public class InjectedViewModelProviders {
     @NonNull
     @MainThread
     public static InjectedViewModelProvider of(@NonNull FragmentActivity activity) {
-        return new InjectedViewModelProvider(ViewModelStores.of(activity));
+        return new InjectedViewModelProvider(activity.getViewModelStore());
     }
 }
