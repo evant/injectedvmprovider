@@ -4,11 +4,12 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-
+import androidx.lifecycle.ViewModelStoreOwner;
 
 /**
  * Utilities methods for {@link androidx.lifecycle.ViewModelStore} class.
  */
+@Deprecated
 public class InjectedViewModelProviders {
 
     /**
@@ -17,8 +18,10 @@ public class InjectedViewModelProviders {
      *
      * @param fragment a fragment, in whose scope ViewModels should be retained
      * @return a ViewModelProvider instance
+     * @deprecated Use {@link InjectedViewModelProvider#of(ViewModelStoreOwner)} instead.
      */
     @MainThread
+    @Deprecated
     public static InjectedViewModelProvider of(@NonNull Fragment fragment) {
         return new InjectedViewModelProvider(fragment.getViewModelStore());
     }
@@ -29,9 +32,11 @@ public class InjectedViewModelProviders {
      *
      * @param activity an activity, in whose scope ViewModels should be retained
      * @return a ViewModelProvider instance
+     * @deprecated Use {@link InjectedViewModelProvider#of(ViewModelStoreOwner)} instead.
      */
     @NonNull
     @MainThread
+    @Deprecated
     public static InjectedViewModelProvider of(@NonNull FragmentActivity activity) {
         return new InjectedViewModelProvider(activity.getViewModelStore());
     }

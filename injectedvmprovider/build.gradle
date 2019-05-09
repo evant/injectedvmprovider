@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -24,6 +25,14 @@ android {
 dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     api 'javax.inject:javax.inject:1'
+
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+}
+
+repositories {
+    mavenCentral()
 }
 
 apply from: '../publish.gradle'
