@@ -10,12 +10,13 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 [![Sonatype Snapshot](https://img.shields.io/nexus/s/https/oss.sonatype.org/me.tatarka.injectedvmprovider/injectedvmprovider.svg)](https://oss.sonatype.org/content/repositories/snapshots/me/tatarka/injectedvmprovider/)
 
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-extensions:2.1.1'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider:2.2.0-SNAPSHOT'
 ```
 
 #### Usage
 
 Set up your ViewModel
+
 ```java
 public class MyViewModel extends ViewModel {
     private final MyDependency source;
@@ -28,6 +29,7 @@ public class MyViewModel extends ViewModel {
 ```
 
 Inject your ViewModel provider into the desired Fragment or Activity
+
 ```java
 public class MyActivity extends AppCompatActivity {
 
@@ -38,36 +40,71 @@ public class MyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ...
-        MyViewModel vm = InjectedViewModelProviders.of(this).get(vmProvider);
+        MyViewModel vm = InjectedViewModelProvider.of(this).get(vmProvider);
     }
 }
 ```
-Note: If you aren't using fragments, you can use `me.tatarka.injectedvmprovider:injectedvmprovider:2.1.1`, and use `new InjectedViewModelProvider(viewModelStoreOwner)` instead.
-
-
 
 If you have a factory, you can inject that instead. This is useful for passing in intent arguments to the view model, and/or with [assisted injection](https://github.com/square/AssistedInject).
+For the key, you can either pass the factory instance or the view model class.
 
 ```java
-@Inject
-MyViewModel.Factory vmFactory;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    ...
-    MyViewModel vm = InjectedViewModelProviders.of(this).get(vmFactory, factory -> factory.create("arg"));
-}
+class MyActivity extends ComponentActivity {
+    @Inject
+    MyViewModel.Factory vmFactory;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MyViewModel vm = InjectedViewModelProvider.of(this).get(vmFactory, factory -> factory.create("arg"));
+        MyViewModel vm2 = InjectedViewModelProvider.of(this).get(MyViweModel.class, () -> vmFactory.create("arg"));
+    }
+} 
 ```
 
 ### From Kotlin
 
 #### Download
+
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:2.1.1'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:2.2.0-SNAPSHOT'
 ```
 
 #### Usage
+
+Set up your ViewModel
+
+```kotlin
+class MyViewModel @Inject constructor(val source: MyDependency) {
+}
+```
+
+Use the `viewModel` delegate to obtain a view model from an injected provider.
+
+```kotlin
+class MyFragment @Inject constructor(val vmProvider: Provider<MyViweModel>) {
+    val vm by viewModel(vmProvider)
+}
+```
+
+If you have field injection or are using a factory, you pass a lambda to view model instead.  
+
+```kotlin
+class MyActivity: ComponentActivity {
+    @Inject
+    latinit var vmProvider: Provider<MyViewModel>
+    @Inject
+    latinit var vmFactory: MyViewModel.Factory
+    
+    val vm by viewModel { vmProvider.get() }
+    val vm2 by viewModel { vmFactory.create("arg") }
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject(this)
+    }
+}
+```
 
 ViewModel
 ```kotlin
