@@ -75,8 +75,7 @@ implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:2.2.0'
 Set up your ViewModel
 
 ```kotlin
-class MyViewModel @Inject constructor(val source: MyDependency) {
-}
+class MyViewModel @Inject constructor(val source: MyDependency): ViewModel()
 ```
 
 Use the `viewModel` delegate to obtain a view model from an injected provider.
@@ -102,26 +101,6 @@ class MyActivity: ComponentActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject(this)
-    }
-}
-```
-
-ViewModel
-```kotlin
-class MainViewModel @Inject constructor(val dependency: Dependency): ViewModel()
-```
-
-Injection
-```kotlin
-class KotlinDaggerMainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var vmProvider: Provider<MainViewModel>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        ...
-        val vm = injectedViewModelProvider.get(vmProvider)
     }
 }
 ```
