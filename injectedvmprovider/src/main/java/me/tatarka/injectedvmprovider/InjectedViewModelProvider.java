@@ -32,7 +32,7 @@ import javax.inject.Provider;
 public class InjectedViewModelProvider {
 
     private static final String DEFAULT_KEY =
-            "android.arch.lifecycle.ViewModelProvider.DefaultKey";
+            "androidx.lifecycle.ViewModelProvider.DefaultKey";
 
     /**
      * Creates an {@link InjectedViewModelProvider}, which retains ViewModels while a scope of given
