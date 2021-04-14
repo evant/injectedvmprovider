@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.tatarka.injectedvmprovider.extensions" />
+    package="me.tatarka.injectedvmprovider.fragment.ktx" />

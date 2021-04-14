@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -23,10 +23,12 @@ android {
 }
 
 dependencies {
-    api "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     api 'javax.inject:javax.inject:1'
 
-    testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }

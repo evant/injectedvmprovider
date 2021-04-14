@@ -2,8 +2,9 @@ package me.tatarka.injectedvmprovider
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -17,7 +18,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
-class InjectedViewModelLazyTest {
+class FragmentInjectedViewModelLazyTest {
 
     @get:Rule
     val instantTaskExecutor = InstantTaskExecutorRule()
@@ -31,17 +32,33 @@ class InjectedViewModelLazyTest {
         scenario.moveToState(Lifecycle.State.CREATED)
 
         scenario.onActivity { activity ->
-            assertEquals("arg1", activity.vm.arg)
-            assertEquals("arg1", activity.lazyVM.arg)
-            assertEquals("arg2", activity.factoryVM.arg)
-            assertEquals("arg2", activity.lazyFactoryVM.arg)
-            assertEquals("arg3", activity.factoryVM2.handle["key"])
-            assertEquals("arg3", activity.lazyFactoryVM2.handle["key"])
+            val fragment = activity.fragment
+
+            assertEquals("arg1", fragment.vm.arg)
+            assertEquals("arg1", fragment.lazyVM.arg)
+            assertEquals("arg2", fragment.factoryVM.arg)
+            assertEquals("arg2", fragment.lazyFactoryVM.arg)
+            assertEquals("arg3", fragment.factoryVM2.handle["key"])
+            assertEquals("arg3", fragment.lazyFactoryVM2.handle["key"])
         }
     }
 }
 
-class TestActivity : ComponentActivity() {
+class TestActivity : FragmentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        supportFragmentManager.beginTransaction()
+            .add(TestFragment().apply {
+                arguments = intent?.extras
+            }, "tag")
+            .commitNow()
+    }
+
+    val fragment: TestFragment
+        get() = supportFragmentManager.findFragmentByTag("tag") as TestFragment
+}
+
+class TestFragment : Fragment() {
     lateinit var lazyVMProvider: TestViewModelProvider
     lateinit var lazyVMFactory: TestViewModelFactory
     lateinit var lazyVMFactory2: TestViewModelFactory2

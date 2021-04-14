@@ -28,8 +28,8 @@ android {
 }
 
 dependencies {
-    implementation project(':injectedvmprovider')
-    api 'androidx.activity:activity-ktx:1.2.2'
+    api project(':injectedvmprovider-ktx')
+    api 'androidx.fragment:fragment-ktx:1.3.2'
 
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "androidx.test:core-ktx:1.3.0"
