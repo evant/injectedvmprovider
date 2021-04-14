@@ -10,7 +10,7 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 [![Sonatype Snapshot](https://img.shields.io/nexus/s/https/oss.sonatype.org/me.tatarka.injectedvmprovider/injectedvmprovider.svg)](https://oss.sonatype.org/content/repositories/snapshots/me/tatarka/injectedvmprovider/)
 
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider:2.2.1'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider:3.0.0'
 ```
 
 #### Usage
@@ -67,7 +67,9 @@ class MyActivity extends ComponentActivity {
 #### Download
 
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:2.2.1'
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-ktx:3.0.0'
+// or if you are using fragments
+implementation 'me.tatarka.injectedvmprovider:injectedvmprovider-fragment-ktx:3.0.0'
 ```
 
 #### Usage
@@ -78,15 +80,16 @@ Set up your ViewModel
 class MyViewModel @Inject constructor(val source: MyDependency): ViewModel()
 ```
 
-Use the `viewModel` delegate to obtain a view model from an injected provider.
+Use the `viewModels` delegate to obtain a view model from an injected provider.
 
 ```kotlin
 class MyFragment @Inject constructor(val vmProvider: Provider<MyViweModel>) {
-    val vm by viewModel(vmProvider)
+    val vm by viewModels(vmProvider)
 }
 ```
 
-If you have field injection or are using a factory, you pass a lambda to view model instead.  
+If you have field injection or are using a factory, you pass a lambda to view model instead. This
+lambda will provide a `SavedStateHandle` that you may pass along to your view model.
 
 ```kotlin
 class MyActivity: ComponentActivity {
@@ -96,7 +99,7 @@ class MyActivity: ComponentActivity {
     latinit var vmFactory: MyViewModel.Factory
     
     val vm by viewModel { vmProvider.get() }
-    val vm2 by viewModel { vmFactory.create("arg") }
+    val vm2 by viewModel { handle -> vmFactory.create(handle) }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

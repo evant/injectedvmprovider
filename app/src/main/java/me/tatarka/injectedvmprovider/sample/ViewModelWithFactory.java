@@ -4,16 +4,23 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+
+import dagger.assisted.Assisted;
+import dagger.assisted.AssistedFactory;
+import dagger.assisted.AssistedInject;
 
 public class ViewModelWithFactory extends ViewModel {
     private static final String TAG = "ViewModelWithFactory";
     private final Source source;
     private final String arg;
 
-    ViewModelWithFactory(Source source, String arg) {
+    @AssistedInject
+    ViewModelWithFactory(Source source, @Assisted SavedStateHandle handle) {
         this.source = source;
-        this.arg = arg;
+        this.arg = handle.get("arg");
         Log.d(TAG, "created");
     }
 
@@ -26,16 +33,9 @@ public class ViewModelWithFactory extends ViewModel {
         return "Hello " + source + " " + arg + "!";
     }
 
-    public static class Factory {
-        private final Source source;
-
-        @Inject
-        public Factory(Source source) {
-            this.source = source;
-        }
-
-        public ViewModelWithFactory create(String arg) {
-            return new ViewModelWithFactory(source, arg);
-        }
+    @AssistedFactory
+    public interface Factory {
+        @NonNull
+        ViewModelWithFactory create(@NonNull SavedStateHandle handle);
     }
 }

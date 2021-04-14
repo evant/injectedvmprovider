@@ -1,18 +1,17 @@
 package me.tatarka.injectedvmprovider.sample;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import me.tatarka.injectedvmprovider.FactoryCreator;
-import me.tatarka.injectedvmprovider.InjectedViewModelProviders;
+import me.tatarka.injectedvmprovider.InjectedViewModelProvider;
 import me.tatarka.injectedvmprovider.sample.toothpick.MainModule;
 import toothpick.Scope;
 import toothpick.Toothpick;
-import toothpick.config.Module;
 
 public class ToothpickMainActivity extends AppCompatActivity {
 
@@ -27,8 +26,9 @@ public class ToothpickMainActivity extends AppCompatActivity {
         Scope scope = Toothpick.openScope("ToothpickMainActivity");
         scope.installModules(new MainModule());
         Toothpick.inject(this, scope);
-        MainViewModel vm1 = InjectedViewModelProviders.of(this).get(vmProvider);
-        ViewModelWithFactory vm2 = InjectedViewModelProviders.of(this).get(vmFactory, factory -> factory.create("arg"));
+        InjectedViewModelProvider provider = new InjectedViewModelProvider(this, getIntent().getExtras());
+        MainViewModel vm1 = provider.get(vmProvider);
+        ViewModelWithFactory vm2 = provider.get(vmFactory, ViewModelWithFactory.Factory::create);
         setContentView(R.layout.activity_main);
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(vm1.getText());
