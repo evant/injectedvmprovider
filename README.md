@@ -10,7 +10,7 @@ This is a small lib to use easily use Android's ViewModels with a depedency inje
 [![Sonatype Snapshot](https://img.shields.io/nexus/s/https/oss.sonatype.org/me.tatarka.injectedvmprovider/injectedvmprovider.svg)](https://oss.sonatype.org/content/repositories/snapshots/me/tatarka/injectedvmprovider/)
 
 ```groovy
-implementation 'me.tatarka.injectedvmprovider:injectedvmprovider:3.0.0'
+implementation("me.tatarka.injectedvmprovider:injectedvmprovider:3.0.0")
 ```
 
 #### Usage
