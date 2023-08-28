@@ -1,6 +1,12 @@
 # Injected ViewModel Provider
 This is a small lib to use easily use Android's ViewModels with a depedency injection framework like dagger. You obtain a `ViewModel` from a `javax.inject.Provider` instead of a `ViewModelProvider.Factory`.
 
+[Deprecated]
+
+There are now improved viewmodel functions in androidx which means this library really isn't needed anymore.
+https://developer.android.com/topic/libraries/architecture/viewmodel/viewmodel-factories
+
+
 ## Usage
 
 ### From Java
